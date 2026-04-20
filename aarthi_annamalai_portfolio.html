@@ -1,0 +1,323 @@
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#ffffff;--bg2:#f8f7ff;--bg3:#ede9fe;--text:#1e1b4b;--text2:#4b5563;--text3:#9ca3af;
+  --accent:#7c3aed;--accent2:#a78bfa;--border:#e5e7eb;--card:#ffffff;--nav:#fffffff0;
+  --input-bg:#f9fafb;--tag-bg:#ede9fe;--tag-text:#5b21b6;
+}
+[data-theme="dark"]{
+  --bg:#0d0a1a;--bg2:#13102a;--bg3:#1e1640;--text:#ede9fe;--text2:#a78bfa;--text3:#6d6a8a;
+  --accent:#a78bfa;--accent2:#7c3aed;--border:#2d2460;--card:#13102a;--nav:#0d0a1af2;
+  --input-bg:#1e1640;--tag-bg:#2d2460;--tag-text:#c4b5fd;
+}
+html{font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);transition:background .3s,color .3s;height:620px;overflow-y:auto;overflow-x:hidden}
+nav{position:sticky;top:0;z-index:100;background:var(--nav);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:50px}
+.nav-brand{font-size:1rem;font-weight:700;color:var(--accent);letter-spacing:-0.3px}
+.nav-links{display:flex;gap:0.1rem}
+.nav-links a{padding:0.3rem 0.6rem;border-radius:6px;text-decoration:none;color:var(--text2);font-size:0.78rem;font-weight:500;transition:all .2s}
+.nav-links a:hover{background:var(--bg3);color:var(--accent)}
+.theme-btn{padding:0.28rem 0.7rem;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);cursor:pointer;font-size:0.75rem;font-weight:500;transition:all .2s}
+.theme-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+#hero{background:var(--bg2);padding:3rem 1.5rem 2.5rem;text-align:center;border-bottom:1px solid var(--border)}
+.avatar{width:78px;height:78px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;margin:0 auto 1rem;font-weight:700;letter-spacing:1px}
+#hero h1{font-size:1.8rem;font-weight:700;color:var(--text);margin-bottom:0.3rem}
+.hero-role{font-size:0.92rem;color:var(--accent);font-weight:600;margin-bottom:0.6rem}
+#hero p{color:var(--text2);font-size:0.82rem;line-height:1.75;max-width:520px;margin:0 auto 1.2rem}
+.hero-meta{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.2rem}
+.hero-meta span{font-size:0.75rem;color:var(--text3);display:flex;align-items:center;gap:4px}
+.dot{width:4px;height:4px;border-radius:50%;background:var(--accent);display:inline-block}
+.hero-tags{display:flex;gap:0.45rem;justify-content:center;flex-wrap:wrap}
+.tag{padding:0.25rem 0.75rem;border-radius:20px;font-size:0.72rem;font-weight:600;background:var(--tag-bg);color:var(--tag-text);border:1px solid var(--border)}
+.hero-btns{display:flex;gap:0.75rem;justify-content:center;margin-top:1.2rem}
+.btn-outline{padding:0.4rem 1rem;border-radius:7px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;font-size:0.78rem;font-weight:600;transition:all .2s;text-decoration:none}
+.btn-outline:hover{background:var(--accent);color:#fff}
+.btn-fill{padding:0.4rem 1rem;border-radius:7px;border:none;background:var(--accent);color:#fff;cursor:pointer;font-size:0.78rem;font-weight:600;transition:all .2s}
+.btn-fill:hover{opacity:.85}
+section{padding:2.5rem 1.5rem;max-width:860px;margin:0 auto}
+section h2{font-size:1.25rem;font-weight:700;color:var(--text);margin-bottom:0.3rem}
+.divider{width:36px;height:3px;background:var(--accent);border-radius:2px;margin:0.4rem 0 1.4rem}
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:1.5rem;align-items:start}
+.about-text p{font-size:0.83rem;color:var(--text2);line-height:1.8;margin-bottom:0.75rem}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.9rem;text-align:center}
+.stat-num{font-size:1.4rem;font-weight:700;color:var(--accent)}
+.stat-label{font-size:0.68rem;color:var(--text3);margin-top:2px}
+.skills-cats{display:flex;flex-direction:column;gap:1rem}
+.skill-cat h3{font-size:0.78rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:0.6rem}
+.skills-row{display:flex;flex-wrap:wrap;gap:0.45rem}
+.skill-pill{padding:0.3rem 0.8rem;border-radius:20px;font-size:0.75rem;font-weight:500;background:var(--card);border:1px solid var(--border);color:var(--text2);transition:all .2s}
+.skill-pill:hover{border-color:var(--accent);color:var(--accent);background:var(--tag-bg)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0.9rem}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.1rem;transition:all .2s;position:relative;overflow:hidden}
+.proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:0;transition:opacity .2s}
+.proj-card:hover{border-color:var(--accent2);transform:translateY(-2px)}
+.proj-card:hover::before{opacity:1}
+.proj-badge{display:inline-block;padding:0.18rem 0.55rem;border-radius:4px;font-size:0.67rem;font-weight:700;background:var(--tag-bg);color:var(--tag-text);margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.5px}
+.proj-card h3{font-size:0.88rem;font-weight:700;margin-bottom:0.45rem;color:var(--text)}
+.proj-card p{font-size:0.76rem;color:var(--text2);line-height:1.65}
+.proj-tags{display:flex;gap:0.35rem;flex-wrap:wrap;margin-top:0.7rem}
+.proj-tag{font-size:0.65rem;padding:0.15rem 0.5rem;border-radius:4px;background:var(--bg3);color:var(--text3);font-weight:500}
+.exp-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.1rem;margin-bottom:0.8rem;display:flex;gap:1rem;align-items:flex-start}
+.exp-icon{width:38px;height:38px;border-radius:9px;background:var(--tag-bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.exp-body h3{font-size:0.88rem;font-weight:700;color:var(--text)}
+.exp-body .exp-meta{font-size:0.72rem;color:var(--accent);font-weight:600;margin:0.2rem 0 0.4rem}
+.exp-body p{font-size:0.77rem;color:var(--text2);line-height:1.65}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.7rem}
+.cert-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:0.85rem 1rem;display:flex;align-items:center;gap:0.6rem;transition:all .2s}
+.cert-card:hover{border-color:var(--accent);background:var(--tag-bg)}
+.cert-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.cert-card span{font-size:0.77rem;font-weight:500;color:var(--text2)}
+.edu-timeline{position:relative;padding-left:1.5rem}
+.edu-timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--border)}
+.edu-item{position:relative;margin-bottom:1.4rem;padding-left:1rem}
+.edu-dot{position:absolute;left:-1.65rem;top:4px;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.edu-item h3{font-size:0.88rem;font-weight:700;color:var(--text)}
+.edu-item .edu-meta{font-size:0.72rem;color:var(--accent);font-weight:600;margin:0.2rem 0 0.3rem}
+.edu-item p{font-size:0.77rem;color:var(--text2)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1.6fr;gap:1.8rem;align-items:start}
+.contact-info{display:flex;flex-direction:column;gap:0.7rem}
+.c-item{display:flex;align-items:center;gap:0.6rem;font-size:0.8rem;color:var(--text2)}
+.c-icon{width:30px;height:30px;border-radius:7px;background:var(--tag-bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0}
+.form-group{margin-bottom:0.8rem}
+label{display:block;font-size:0.74rem;font-weight:600;color:var(--text3);margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:0.5px}
+input,textarea{width:100%;padding:0.5rem 0.7rem;border:1px solid var(--border);border-radius:8px;background:var(--input-bg);color:var(--text);font-size:0.82rem;font-family:inherit;transition:border .2s;resize:vertical}
+input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+textarea{min-height:85px}
+.err{color:#dc2626;font-size:0.7rem;margin-top:0.25rem;display:none}
+.success{padding:0.65rem 1rem;background:#d1fae5;color:#065f46;border-radius:8px;font-size:0.78rem;font-weight:600;display:none;margin-top:0.6rem}
+[data-theme="dark"] .success{background:#064e3b;color:#6ee7b7}
+.btn-send{background:var(--accent);color:#fff;border:none;padding:0.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:0.82rem;font-weight:600;transition:all .2s;width:100%;margin-top:0.2rem}
+.btn-send:hover{opacity:.88}
+.admin-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.4rem}
+.admin-login-inner{max-width:300px;margin:0 auto}
+.admin-login-inner h3{font-size:0.95rem;font-weight:700;text-align:center;margin-bottom:1rem;color:var(--text)}
+.admin-err{color:#dc2626;font-size:0.72rem;text-align:center;margin-top:0.4rem;display:none}
+.adm-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.badge{padding:0.18rem 0.55rem;border-radius:10px;font-size:0.68rem;font-weight:700;background:var(--accent);color:#fff}
+.resp-card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:0.9rem;margin-bottom:0.65rem}
+.resp-card .rh{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.35rem}
+.resp-card h4{font-size:0.84rem;font-weight:700;color:var(--text)}
+.resp-card .rt{font-size:0.67rem;color:var(--text3)}
+.resp-card .re{font-size:0.72rem;color:var(--accent);margin-bottom:0.35rem}
+.resp-card .rm{font-size:0.77rem;color:var(--text2);line-height:1.6}
+.empty{text-align:center;padding:1.5rem;color:var(--text3);font-size:0.8rem}
+#adm-viewer{display:none}
+#adm-login{display:block}
+#resp-list{max-height:280px;overflow-y:auto}
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.2rem 1.5rem;text-align:center;font-size:0.74rem;color:var(--text3)}
+.socials{display:flex;gap:0.6rem;justify-content:center;margin-bottom:0.6rem}
+.soc{padding:0.3rem 0.8rem;border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--text2);font-size:0.72rem;font-weight:500;transition:all .2s}
+.soc:hover{border-color:var(--accent);color:var(--accent)}
+</style>
+
+<nav>
+  <span class="nav-brand">Aarthi Annamalai</span>
+  <div class="nav-links">
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#edu">Education</a>
+    <a href="#contact">Contact</a>
+    <a href="#admin">Admin</a>
+  </div>
+  <button class="theme-btn" id="theme-btn">🌙 Dark</button>
+</nav>
+
+<div id="hero">
+  <div class="avatar">AA</div>
+  <h1>Aarthi Annamalai</h1>
+  <div class="hero-role">AI &amp; Data Science Engineer · Final Year B.Tech</div>
+  <p>Final-year B.Tech student in Artificial Intelligence and Data Science with strong skills in Python, Java, and data analysis. Passionate about building AI-driven and automation solutions. Seeking an entry-level role in software development or data analysis.</p>
+  <div class="hero-meta">
+    <span><span class="dot"></span> Kallakurichi, Tamil Nadu, India</span>
+    <span><span class="dot"></span> aarthiannamalai05@gmail.com</span>
+    <span><span class="dot"></span> 9342934791</span>
+    <span><span class="dot"></span> Superset ID: 7274631</span>
+  </div>
+  <div class="hero-tags">
+    <span class="tag">Python</span><span class="tag">Java</span><span class="tag">Machine Learning</span>
+    <span class="tag">IoT</span><span class="tag">Blockchain</span><span class="tag">MongoDB</span><span class="tag">Data Analysis</span>
+  </div>
+  <div class="hero-btns">
+    <a href="https://github.com/aarthiannamalai05" class="btn-outline">GitHub Profile</a>
+    <button class="btn-fill" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+  </div>
+</div>
+
+<section id="about">
+  <h2>About me</h2>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a final-year B.Tech student specialising in Artificial Intelligence and Data Science at Bharathiyar Institute of Engineering for Women. I enjoy solving real-world problems through intelligent systems, automation, and data-driven approaches.</p>
+      <p>From IoT-powered waste monitoring to blockchain-based voting systems, I love building projects that have a real impact. I'm also a Python intern graduate and hold certifications in MongoDB, AI &amp; ML, and Cybersecurity.</p>
+      <p>I thrive in collaborative environments and bring strong communication and problem-solving skills to every team I work with.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">8.14</div><div class="stat-label">Current CGPA</div></div>
+      <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">Projects Built</div></div>
+      <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Certifications</div></div>
+      <div class="stat-card"><div class="stat-num">2026</div><div class="stat-label">Graduating</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Technical skills</h2>
+  <div class="divider"></div>
+  <div class="skills-cats">
+    <div class="skill-cat"><h3>Programming</h3><div class="skills-row"><span class="skill-pill">Python</span><span class="skill-pill">Java</span><span class="skill-pill">HTML</span></div></div>
+    <div class="skill-cat"><h3>AI / Machine Learning</h3><div class="skills-row"><span class="skill-pill">Machine Learning Basics</span><span class="skill-pill">Decision Support Systems</span><span class="skill-pill">Data Analysis</span></div></div>
+    <div class="skill-cat"><h3>Database &amp; Tools</h3><div class="skills-row"><span class="skill-pill">MongoDB</span><span class="skill-pill">Microsoft Excel</span><span class="skill-pill">IoT Systems</span><span class="skill-pill">Blockchain</span><span class="skill-pill">GSM Modules</span></div></div>
+    <div class="skill-cat"><h3>Soft skills</h3><div class="skills-row"><span class="skill-pill">Problem Solving</span><span class="skill-pill">Communication</span><span class="skill-pill">Teamwork</span></div></div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="divider"></div>
+  <div class="projects-grid">
+    <div class="proj-card"><div class="proj-badge">IoT</div><h3>Smart Trash Collector</h3><p>IoT-based waste monitoring system using ultrasonic sensors and GSM alerts to notify when bins are full, improving waste collection efficiency.</p><div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">IoT</span><span class="proj-tag">GSM</span><span class="proj-tag">Sensors</span></div></div>
+    <div class="proj-card"><div class="proj-badge">Blockchain</div><h3>Blockchain Voting System</h3><p>Secure, tamper-proof digital voting system leveraging blockchain to ensure data integrity and transparency throughout the election process.</p><div class="proj-tags"><span class="proj-tag">Blockchain</span><span class="proj-tag">Security</span><span class="proj-tag">Data Integrity</span></div></div>
+    <div class="proj-card"><div class="proj-badge">Hardware</div><h3>Fire Alarm System</h3><p>Sensor-based fire detection system designed to identify fire incidents early and trigger automated alerts for quick response.</p><div class="proj-tags"><span class="proj-tag">Sensors</span><span class="proj-tag">Embedded</span><span class="proj-tag">Automation</span></div></div>
+    <div class="proj-card"><div class="proj-badge">AI / ML</div><h3>AI Decision Support System</h3><p>Built an AI-powered model for data-driven decision making, enabling intelligent analysis and recommendations from structured datasets.</p><div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Machine Learning</span><span class="proj-tag">Data Analysis</span></div></div>
+  </div>
+</section>
+
+<section id="edu">
+  <h2>Experience &amp; Education</h2>
+  <div class="divider"></div>
+  <div class="exp-card">
+    <div class="exp-icon">💼</div>
+    <div class="exp-body">
+      <h3>Python Intern</h3>
+      <div class="exp-meta">Emglitz Technologies</div>
+      <p>Worked on Python development and automation tasks, gaining hands-on experience in scripting, workflow automation, and software development best practices.</p>
+    </div>
+  </div>
+  <div style="margin-top:1.4rem;margin-bottom:0.8rem"><h3 style="font-size:0.78rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.8px">Certifications</h3></div>
+  <div class="certs-grid">
+    <div class="cert-card"><div class="cert-dot"></div><span>MongoDB Certification</span></div>
+    <div class="cert-card"><div class="cert-dot"></div><span>AI &amp; ML Workshop</span></div>
+    <div class="cert-card"><div class="cert-dot"></div><span>Cybersecurity Workshop</span></div>
+  </div>
+  <div style="margin-top:1.8rem">
+    <div class="edu-timeline">
+      <div class="edu-item"><div class="edu-dot"></div><h3>B.Tech — Artificial Intelligence and Data Science</h3><div class="edu-meta">Bharathiyar Institute of Engineering for Women · 2022 – 2026</div><p>CGPA: 8.14 &nbsp;|&nbsp; Focused on AI systems, data science, and real-world project development.</p></div>
+      <div class="edu-item"><div class="edu-dot"></div><h3>Higher Secondary Certificate (HSC)</h3><div class="edu-meta">Annai Teresa Matric Higher Secondary School · 2021 – 2022</div><p>Scored 71.4% in Higher Secondary examinations.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Get in touch</h2>
+  <div class="divider"></div>
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <div class="c-item"><div class="c-icon">📧</div><span>aarthiannamalai05@gmail.com</span></div>
+      <div class="c-item"><div class="c-icon">📞</div><span>9342934791</span></div>
+      <div class="c-item"><div class="c-icon">📍</div><span>Kallakurichi, Tamil Nadu, India</span></div>
+      <div class="c-item"><div class="c-icon">🐙</div><span>github.com/aarthiannamalai05</span></div>
+      <div class="c-item"><div class="c-icon">🎓</div><span>Superset ID: 7274631</span></div>
+    </div>
+    <div>
+      <div class="form-group"><label>Your name</label><input type="text" id="c-name" placeholder="Jane Smith"></div>
+      <div class="form-group"><label>Email address</label><input type="text" id="c-email" placeholder="jane@example.com"><div class="err" id="email-err">Please enter a valid email address.</div></div>
+      <div class="form-group"><label>Message</label><textarea id="c-msg" placeholder="Say hello or discuss an opportunity..."></textarea></div>
+      <button class="btn-send" id="submit-btn">Send message</button>
+      <div class="success" id="success-msg">Message sent! Aarthi will get back to you soon.</div>
+    </div>
+  </div>
+</section>
+
+<section id="admin">
+  <h2>Admin panel</h2>
+  <div class="divider"></div>
+  <div class="admin-wrap">
+    <div id="adm-login">
+      <div class="admin-login-inner">
+        <h3>Sign in to view responses</h3>
+        <div class="form-group"><label>Username</label><input type="text" id="a-user" placeholder="admin"></div>
+        <div class="form-group"><label>Password</label><input type="password" id="a-pass" placeholder="••••••••"></div>
+        <button class="btn-send" id="login-btn">Sign in</button>
+        <div class="admin-err" id="adm-err">Invalid credentials. Try admin / aarthi123</div>
+        <p style="font-size:0.69rem;color:var(--text3);text-align:center;margin-top:0.6rem">Demo: <strong>admin</strong> / <strong>aarthi123</strong></p>
+      </div>
+    </div>
+    <div id="adm-viewer">
+      <div class="adm-header">
+        <div style="display:flex;align-items:center;gap:0.5rem"><strong style="font-size:0.88rem">Submitted messages</strong><span class="badge" id="resp-count">0</span></div>
+        <button class="theme-btn" id="logout-btn">Sign out</button>
+      </div>
+      <div id="resp-list"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="socials">
+    <a class="soc" href="https://github.com/aarthiannamalai05">GitHub</a>
+    <a class="soc" href="#">LinkedIn</a>
+    <a class="soc" href="mailto:aarthiannamalai05@gmail.com">Email</a>
+  </div>
+  <p>© 2026 Aarthi Annamalai · AI &amp; Data Science Engineer · Kallakurichi, Tamil Nadu</p>
+</footer>
+
+<script>
+const root=document.documentElement;
+const themeBtn=document.getElementById('theme-btn');
+let dark=localStorage.getItem('aarthi-theme')==='dark';
+function applyTheme(){root.setAttribute('data-theme',dark?'dark':'light');themeBtn.textContent=dark?'☀️ Light':'🌙 Dark';}
+applyTheme();
+themeBtn.addEventListener('click',()=>{dark=!dark;localStorage.setItem('aarthi-theme',dark?'dark':'light');applyTheme();});
+const emailRx=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+document.getElementById('submit-btn').addEventListener('click',()=>{
+  const name=document.getElementById('c-name').value.trim();
+  const email=document.getElementById('c-email').value.trim();
+  const msg=document.getElementById('c-msg').value.trim();
+  const err=document.getElementById('email-err');
+  const ok=document.getElementById('success-msg');
+  err.style.display='none';
+  if(!name||!email||!msg){alert('Please fill in all fields.');return;}
+  if(!emailRx.test(email)){err.style.display='block';return;}
+  const subs=JSON.parse(localStorage.getItem('aarthi-responses')||'[]');
+  subs.push({name,email,message:msg,timestamp:new Date().toISOString()});
+  localStorage.setItem('aarthi-responses',JSON.stringify(subs));
+  document.getElementById('c-name').value='';
+  document.getElementById('c-email').value='';
+  document.getElementById('c-msg').value='';
+  ok.style.display='block';
+  setTimeout(()=>ok.style.display='none',4000);
+});
+document.getElementById('login-btn').addEventListener('click',()=>{
+  const u=document.getElementById('a-user').value.trim();
+  const p=document.getElementById('a-pass').value;
+  const e=document.getElementById('adm-err');
+  if(u==='admin'&&p==='aarthi123'){
+    e.style.display='none';
+    document.getElementById('adm-login').style.display='none';
+    document.getElementById('adm-viewer').style.display='block';
+    renderResps();
+  } else {e.style.display='block';}
+});
+document.getElementById('logout-btn').addEventListener('click',()=>{
+  document.getElementById('adm-login').style.display='block';
+  document.getElementById('adm-viewer').style.display='none';
+  document.getElementById('a-user').value='';
+  document.getElementById('a-pass').value='';
+});
+function renderResps(){
+  const data=JSON.parse(localStorage.getItem('aarthi-responses')||'[]');
+  const list=document.getElementById('resp-list');
+  document.getElementById('resp-count').textContent=data.length;
+  if(!data.length){list.innerHTML='<div class="empty">No messages yet. Submit the contact form to see responses here.</div>';return;}
+  list.innerHTML=data.slice().reverse().map(r=>{
+    const d=new Date(r.timestamp);
+    const fmt=d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})+' · '+d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+    return `<div class="resp-card"><div class="rh"><h4>${r.name}</h4><span class="rt">${fmt}</span></div><div class="re">${r.email}</div><div class="rm">${r.message}</div></div>`;
+  }).join('');
+}
+</script>
